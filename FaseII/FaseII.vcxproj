@@ -142,10 +142,10 @@
   <ItemGroup>
     <ClCompile Include="FaseII.cpp" />
     <ClCompile Include="RegresionCpp.cpp" />
+    <ClCompile Include="Regresionx86.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="RegresionCpp.h" />
+    <ClInclude Include="Regresion.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
