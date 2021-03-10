@@ -1,7 +1,8 @@
 #include "Regresion.h"
 
 Result regresionx86(int X[], int Y[], int arr_size){
-    int suma_x, suma_y, suma_xy, suma_xx, media, var_x, cov_xy;
+    int suma_x, suma_y, suma_xy, suma_xx;
+    float media, var_x, cov_xy;
     suma_x = suma_y = suma_xy = suma_xx = media = var_x = cov_xy = 0;
 
     Result result;

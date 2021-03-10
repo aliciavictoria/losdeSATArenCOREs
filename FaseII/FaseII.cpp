@@ -6,8 +6,8 @@ using std::endl;
 
 int main(){
 	constexpr int arr_size = 5;
-	int* X = new int[arr_size] {1,2,3,4,5};
-	int* Y = new int[arr_size] {1,2,3,4,5};
+	int* X = new int[arr_size] {1,2,6,4,5};
+	int* Y = new int[arr_size] {5,2,3,4,5};
 
 	Result resultCpp = regresionCpp(X, Y, arr_size);
 	cout <<"Recta Regresion en cpp-> m="<<resultCpp.m<<", n="<<resultCpp.n<< endl;

@@ -14,8 +14,8 @@ Result regresionCpp(int X[], int Y[], int arr_size){
     float media_x = suma_x / (float)arr_size;
     float media_y = suma_y / (float)arr_size;
 
-    float var_x = (suma_xx/arr_size) - (media_x*media_x);
-    float cov_xy = (suma_xy/arr_size) - (media_x*media_y);
+    float var_x = (suma_xx/(float)arr_size) - (media_x*media_x);
+    float cov_xy = (suma_xy/(float)arr_size) - (media_x*media_y);
 
     Result result;
     result.m = cov_xy / var_x;
