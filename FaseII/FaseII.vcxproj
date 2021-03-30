@@ -141,11 +141,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FaseII.cpp" />
+    <ClCompile Include="pbPlots.cpp" />
     <ClCompile Include="RegresionCpp.cpp" />
     <ClCompile Include="Regresionx86.cpp" />
+    <ClCompile Include="supportLib.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="pbPlots.hpp" />
     <ClInclude Include="Regresion.h" />
+    <ClInclude Include="supportLib.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
