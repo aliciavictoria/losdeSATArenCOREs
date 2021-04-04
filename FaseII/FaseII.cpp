@@ -1,18 +1,39 @@
+//El sse solo funcion con floats, los demas con enteros
+//Cuidado porque el sse por ahora solo funcion con arr_size de multiplo de 4
+//Elimina este ejemplo y sigue con lo que tenias
+//Cuidado porque en cada iteracion debes hacer un delete de los vectores
 #include <iostream>
 #include "Regresion.h"
 
 using std::cout;
 using std::endl;
 
-//___________________________________________________________________________
-#include <cstdio>
-#include <cstdlib>
+
+int main() {
+	constexpr int arr_size = 4;
+	int* X_i = new int[arr_size] {1,1,1,4};
+	int* Y_i = new int[arr_size] {1,2,4,4};
+	float* X_f = new float[arr_size] {1.0,1.0,1.0,4.0};
+	float* Y_f = new float[arr_size] {1.0,2.0,4.0,4.0};
+
+	Result resultCpp = regresionCpp(X_i, Y_i, arr_size);
+	cout << "Recta Regresion en cpp-> m=" << resultCpp.m << ", n=" << resultCpp.n << endl;
+
+	Result resultx86 = regresionx86(X_i, Y_i, arr_size);
+	cout << "Recta Regresion en x86-> m=" << resultx86.m << ", n=" << resultx86.n << endl;
+
+	Result resultSSE = regresionSSE(X_f, Y_f, arr_size);
+	cout << "Recta Regresion en SSE-> m=" << resultSSE.m << ", n=" << resultSSE.n << endl;
+
+	return 0;
+}
+
+/*
 #include <iostream>
-#include <cstring>
-#include <cmath>
 #include <vector>
 #include "pbPlots.hpp"
 #include "supportLib.hpp"
+#include "Regresion.h"
 
 using namespace std;
 
@@ -75,7 +96,7 @@ int main(){
 
         s.push_back(arr_size);
 
-        for (int j = 0; j < arr_size; j++) 
+        for (int j = 0; j < arr_size; j++)
         {
             X[j] = rand() % 20 + 1;
             Y[j] = rand() % 20 + 1;
@@ -119,3 +140,4 @@ int main(){
 
     time_pbplot(timeCpp, timeX86,s);
 }
+*/

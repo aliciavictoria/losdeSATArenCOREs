@@ -3,12 +3,12 @@
 Result regresionx86(int X[], int Y[], int arr_size){
     int suma_x, suma_y, suma_xy, suma_xx;
     float media, var_x, cov_xy;
-    suma_x = suma_y = suma_xy = suma_xx = media = var_x = cov_xy = 0;
+    suma_x = suma_y = suma_xy = suma_xx = 0;
+    media = var_x = cov_xy = 0.0;
 
     Result result;
 
     __asm{
-        xor edx, edx            ;imul purposes
         xor esi, esi            ;se usara como cont del arr de puntos
         mov edi, arr_size       ;se usara como max iteraciones en los arr de puntos
 
@@ -35,12 +35,12 @@ Result regresionx86(int X[], int Y[], int arr_size){
 
                                 ;suma_xx += X[i] * X[i];
             mov eax, ebx
-            imul eax
+            mul eax
             add suma_xx, eax
 
                                 ;suma_xy += X[i] * Y[i];
             mov eax, ebx
-            imul ecx
+            mul ecx
             add suma_xy, eax
 
             add esi, 1
@@ -49,27 +49,27 @@ Result regresionx86(int X[], int Y[], int arr_size){
 
         calc:
                                 ;media_x
-            fld suma_x
-            fdiv arr_size
+            fild suma_x
+            fidiv arr_size
             fst media
 
                                 ;media_x*media_x
             fmul media
             fstp var_x
                                 ;var_x = (suma_xx/arr_size) - (media_x*media_x)
-            fld suma_xx
-            fdiv arr_size
+            fild suma_xx
+            fidiv arr_size
             fsub var_x
             fstp var_x
 
                                 ;media_y*media_x
-            fld suma_y
-            fdiv arr_size
+            fild suma_y
+            fidiv arr_size
             fmul media
             fstp cov_xy
                                 ;cov_x = (suma_xy/arr_size) - (media_x*media_y)
-            fld suma_xy
-            fdiv arr_size
+            fild suma_xy
+            fidiv arr_size
             fsub cov_xy
             fst cov_xy
 
@@ -83,8 +83,8 @@ Result regresionx86(int X[], int Y[], int arr_size){
                                 ;((cov_xy/var_x)*(-media_x))
             fmul result.m
                                 ;media_y
-            fld suma_y
-            fdiv arr_size
+            fild suma_y
+            fidiv arr_size
             fstp media
                                 ;n = ((cov_xy/var_x)*(-media_x)) + media_y
             fadd media
