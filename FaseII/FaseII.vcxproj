@@ -140,16 +140,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Downloads\losdeSATArenCOREs-master\FaseII\pbPlots.cpp" />
-    <ClCompile Include="..\..\..\..\..\..\..\..\Downloads\losdeSATArenCOREs-master\FaseII\supportLib.cpp" />
+    <ClCompile Include="pbPlots.cpp" />
+    <ClCompile Include="supportLib.cpp" />
     <ClCompile Include="FaseII.cpp" />
     <ClCompile Include="RegresionCpp.cpp" />
     <ClCompile Include="RegresionSSE.cpp" />
     <ClCompile Include="Regresionx86.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\..\..\Downloads\losdeSATArenCOREs-master\FaseII\pbPlots.hpp" />
-    <ClInclude Include="..\..\..\..\..\..\..\..\Downloads\losdeSATArenCOREs-master\FaseII\supportLib.hpp" />
+    <ClInclude Include="pbPlots.hpp" />
+    <ClInclude Include="supportLib.hpp" />
     <ClInclude Include="Regresion.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
