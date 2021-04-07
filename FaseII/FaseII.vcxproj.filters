@@ -27,10 +27,10 @@
     <ClCompile Include="RegresionSSE.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Downloads\losdeSATArenCOREs-master\FaseII\supportLib.cpp">
+    <ClCompile Include="supportLib.cpp">
       <Filter>pbplot</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Downloads\losdeSATArenCOREs-master\FaseII\pbPlots.cpp">
+    <ClCompile Include="pbPlots.cpp">
       <Filter>pbplot</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,10 +38,10 @@
     <ClInclude Include="Regresion.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\..\Downloads\losdeSATArenCOREs-master\FaseII\pbPlots.hpp">
+    <ClInclude Include="pbPlots.hpp">
       <Filter>pbplot</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\..\Downloads\losdeSATArenCOREs-master\FaseII\supportLib.hpp">
+    <ClInclude Include="supportLib.hpp">
       <Filter>pbplot</Filter>
     </ClInclude>
   </ItemGroup>
