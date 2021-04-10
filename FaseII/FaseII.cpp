@@ -1,21 +1,18 @@
-//El sse solo funcion con floats, los demas con enteros
-//Cuidado porque el sse por ahora solo funcion con arr_size de multiplo de 4
-//Elimina este ejemplo y sigue con lo que tenias
-//Cuidado porque en cada iteracion debes hacer un delete de los vectores
 /*
+//TEST PARA COMPROBAR QUE LOS ALGORITMOS FUNCIONAN
+//Resultado correcto -> m=0.858491, n=1.36792
 #include <iostream>
 #include "Regresion.h"
 
 using std::cout;
 using std::endl;
 
-
 int main() {
-	constexpr int arr_size = 4;
-	int* X_i = new int[arr_size] {1,1,1,4};
-	int* Y_i = new int[arr_size] {1,2,4,4};
-	float* X_f = new float[arr_size] {1.0,1.0,1.0,4.0};
-	float* Y_f = new float[arr_size] {1.0,2.0,4.0,4.0};
+	constexpr int arr_size = 5;
+	int* X_i = new int[arr_size] {1,1,1,4,6};
+	int* Y_i = new int[arr_size] {1,2,4,4,7};
+	float* X_f = new float[arr_size] {1.0,1.0,1.0,4.0,6.0};
+	float* Y_f = new float[arr_size] {1.0,2.0,4.0,4.0,7.0};
 
 	Result resultCpp = regresionCpp(X_i, Y_i, arr_size);
 	cout << "Recta Regresion en cpp-> m=" << resultCpp.m << ", n=" << resultCpp.n << endl;
@@ -29,6 +26,7 @@ int main() {
 	return 0;
 }
 */
+
 #include <iostream>
 #include <vector>
 #include "pbPlots.hpp"
@@ -72,7 +70,7 @@ void time_pbplot(vector<double> tCpp, vector<double> tX86, vector<double> tXSSE,
     settings->height = 600;
     settings->autoBoundaries = true;
     settings->autoPadding = true;
-    settings->title = toVector(L"Recta de Regresion CPP/X86/SSE");
+    settings->title = toVector(L"Resultados Benchmark (azul->c++ | verde->x86 | negra->sse)");
     settings->xLabel = toVector(L"Size");
     settings->yLabel = toVector(L"Time in ms");
     settings->scatterPlotSeries->push_back(series1);
@@ -101,6 +99,7 @@ int main(){
 
     srand(time(NULL));
 
+    cout << "\033[36mBenchMark de los deSATA renCORES\033[39m" << endl;
     for (int i = 1; i <= 10; i++)
     {
         int arr_size = i * KINC;
@@ -121,7 +120,9 @@ int main(){
         }
 
         cout << "-----------------------------------------------------" << endl;
-        cout << "Prueba size = " << arr_size << endl;
+        cout << "TEST " << i << ": " << endl;
+        cout << "-> Array de " << arr_size << " puntos" << endl;
+        cout << "-> 500 pruebas para cada implementacion" << endl;
         
 
         cout << "Ejecutando regresionCpp..." << endl;
@@ -130,7 +131,7 @@ int main(){
         {
              resultCpp = regresionCpp(X, Y, arr_size);
             cont++;
-        } while (cont < 1000);
+        } while (cont < 500);
         auto end = clock();
         cont = 0;
         timeCpp.push_back(1000.0 * (static_cast<__int64>(end) - start) / CLOCKS_PER_SEC);
@@ -141,7 +142,7 @@ int main(){
         {
              resultx86 = regresionx86(X, Y, arr_size);
             cont++;
-        } while (cont < 1000);
+        } while (cont < 500);
         cont = 0;
         end = clock();
         timeX86.push_back(1000.0 * (static_cast<__int64>(end) - start) / CLOCKS_PER_SEC);
@@ -152,7 +153,7 @@ int main(){
         {
              resultSSE = regresionSSE(f_X, f_Y, arr_size);
             cont++;
-        } while (cont < 1000);
+        } while (cont < 500);
         cont = 0;
         end = clock();
         timeSSE.push_back(1000.0 * (static_cast<__int64>(end) - start) / CLOCKS_PER_SEC);
@@ -183,10 +184,9 @@ int main(){
     cout << "\n##################################" << endl;
     cout << "#  Tiempo medio CPP: " << tMedCpp / i << " ms" << "     #" << endl;
     cout << "#  Tiempo medio X86: " << tMedX86 / i << " ms" << "     #" << endl;
-    cout << "#  Tiempo medio SSE:  " << tMedSSE / i << " ms" << "     #" << endl;
+    cout << "#  Tiempo medio SSE: " << tMedSSE / i << " ms" << "     #" << endl;
     cout << "##################################" << endl;
+    cout << "Resultados en grafica -> ..\\Funcion.png" << endl;
 
     time_pbplot(timeCpp, timeX86,timeSSE,s);
-
-    
 }
