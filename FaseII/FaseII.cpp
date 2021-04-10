@@ -37,7 +37,7 @@ int main() {
 
 using namespace std;
 
-const int KINC = 10000;
+const int KINC = 1000000;
 
 void time_pbplot(vector<double> tCpp, vector<double> tX86, vector<double> tXSSE, vector<double> s)
 {
@@ -90,6 +90,9 @@ void time_pbplot(vector<double> tCpp, vector<double> tX86, vector<double> tXSSE,
 
 int main(){
 
+    Result resultSSE;
+    Result resultx86;
+    Result resultCpp;
     vector<double> timeCpp;
     vector<double> timeX86;
     vector<double> timeSSE;
@@ -117,35 +120,47 @@ int main(){
 
         }
 
+        cout << "-----------------------------------------------------" << endl;
+        cout << "Prueba size = " << arr_size << endl;
+        
+
+        cout << "Ejecutando regresionCpp..." << endl;
         auto start = clock();
         do
         {
-            Result resultCpp = regresionCpp(X, Y, arr_size);
+             resultCpp = regresionCpp(X, Y, arr_size);
             cont++;
-        } while (cont < 100);
+        } while (cont < 1000);
         auto end = clock();
         cont = 0;
         timeCpp.push_back(1000.0 * (static_cast<__int64>(end) - start) / CLOCKS_PER_SEC);
 
+        cout << "Ejecutando regresionx86..." << endl;
         start = clock();
         do
         {
-            Result resultx86 = regresionx86(X, Y, arr_size);
+             resultx86 = regresionx86(X, Y, arr_size);
             cont++;
-        } while (cont < 100);
+        } while (cont < 1000);
         cont = 0;
         end = clock();
         timeX86.push_back(1000.0 * (static_cast<__int64>(end) - start) / CLOCKS_PER_SEC);
 
+        cout << "Ejecutando regresionSSE..." << endl;
         start = clock();
         do
         {
-            Result resultSSE = regresionSSE(f_X, f_Y, arr_size);
+             resultSSE = regresionSSE(f_X, f_Y, arr_size);
             cont++;
-        } while (cont < 100);
+        } while (cont < 1000);
         cont = 0;
         end = clock();
         timeSSE.push_back(1000.0 * (static_cast<__int64>(end) - start) / CLOCKS_PER_SEC);
+
+        delete[] X;
+        delete[] Y;
+        delete[] f_X;
+        delete[] f_Y;
     }
 
     unsigned i;
@@ -165,9 +180,13 @@ int main(){
         tMedSSE += timeSSE[i];
     }
 
-    cout << "Tiempo medio CPP: " << tMedCpp/i << " ms" << endl;
-    cout << "Tiempo medio X86: " << tMedX86/i << " ms" << endl;
-    cout << "Tiempo medio SSE: " << tMedSSE / i << " ms" << endl;
+    cout << "\n##################################" << endl;
+    cout << "#  Tiempo medio CPP: " << tMedCpp / i << " ms" << "     #" << endl;
+    cout << "#  Tiempo medio X86: " << tMedX86 / i << " ms" << "     #" << endl;
+    cout << "#  Tiempo medio SSE:  " << tMedSSE / i << " ms" << "     #" << endl;
+    cout << "##################################" << endl;
 
     time_pbplot(timeCpp, timeX86,timeSSE,s);
+
+    
 }
